@@ -26,6 +26,23 @@ class Tree {
 
         return newNode;
     }
+    includes(value) {
+        let currentNode = this.root;
+
+        while (currentNode !== null) {
+            if (currentNode.data === value) {
+                return true;
+            }
+
+            if (value < currentNode.data) {
+                currentNode = currentNode.left;
+            } else {
+                currentNode = currentNode.right
+            }
+        }
+        return false;
+    }
+
 }
 
 export { Node, Tree };
