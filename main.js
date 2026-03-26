@@ -12,3 +12,7 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
 }
 
 prettyPrint(tree.root);
+
+console.log(tree.includes(2));   // should print true
+console.log(tree.includes(5));   // should print true
+console.log(tree.includes(100)); 
