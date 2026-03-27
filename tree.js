@@ -42,6 +42,57 @@ class Tree {
         }
         return false;
     }
+    insert(value) {
+        if (this.includes(value) === true) {
+            return;
+        }
+        this.root = this.insertHelper(this.root, value);
+    }
+    insertHelper(node, value) {
+        if (node === null) {
+            return new Node(value);
+        }
+        if (value < node.data) {
+            node.left = this.insertHelper(node.left, value);
+        } else {
+            node.right = this.insertHelper(node.right, value);
+        }
+
+        return node;
+    }
+    deleteItem(value) {
+        this.root = this.deleteHelper(this.root, value);
+    }
+    deleteHelper(node, value) {
+        if (node === null) {
+            return null;
+        }
+        if (value < node.data) {
+            node.left = this.deleteHelper(node.left, value);
+        } else if (value > node.data) {
+            node.right = this.deleteHelper(node.right, value);
+        } else {
+            if (node.left === null && node.right === null) {
+                return null;
+            } 
+            if (node.left === null) {
+                return node.right;
+            }
+            if (node.right === null) {
+                return node.left;
+            }
+            let minRight = this.findMin(node.right);
+            node.data = minRight;
+            node.right = this.deleteHelper(node.right, minRight);
+        }
+        return node;
+    }
+    findMin(node) {
+        while (node.left !== null) {
+            node = node.left;
+        }
+        return node.data;
+    }
 
 }
 
